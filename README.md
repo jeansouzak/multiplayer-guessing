@@ -7,3 +7,5 @@ If player match any words through the analysis of the draw player gets score.
 
 # Concept Art
 ![Pages](https://raw.githubusercontent.com/jeansouzak/multiplayer-guessing/master/public/concept_art.png)
+
+Contribute: [Tasks](https://github.com/jeansouzak/multiplayer-guessing/issues/1)

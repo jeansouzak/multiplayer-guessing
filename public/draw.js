@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function setupSocket() {
-       //Listen socket event to draw
+       //TODO: Listen socket event to draw
     }
 
     function draw(line) {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 color: drawingData.color,
                 lineWidth: drawingData.lineWidth 
             }
-            //Draw to other listening clients
+            //TODO: Draw to other listening clients
             draw(line)
             drawingData.moved = false;
         }

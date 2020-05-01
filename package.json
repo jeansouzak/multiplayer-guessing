@@ -1,0 +1,15 @@
+{
+  "name": "multiplayer-guessing",
+  "version": "1.0.0",
+  "description": "Drawing multiplayer when player word is guessed he win points and display ranking on end session time",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "1.4.*"
+  },
+  "author": "Jean Carlo de Souza",
+  "license": "MIT"
+}

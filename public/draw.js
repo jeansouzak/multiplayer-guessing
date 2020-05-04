@@ -20,9 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setupSocket();
     startLoop();
 
-
     function setupCanvas() {
-
         canvas.width = width;
         canvas.height = height;
 
@@ -37,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
             drawingData.pos.y = e.clientY / height;
             drawingData.moved = true;
         };
-
     }
 
-
     function setupSocket() {
-       //TODO: Listen socket event to draw
+        socket.on('draw', function(line) {
+            draw(line);
+        });
     }
 
     function draw(line) {
@@ -62,15 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 color: drawingData.color,
                 lineWidth: drawingData.lineWidth 
             }
-            //TODO: Draw to other listening clients
+            socket.emit('draw', line);
             draw(line)
             drawingData.moved = false;
         }
         drawingData.prev_pos = { x: drawingData.pos.x, y: drawingData.pos.y };
         setTimeout(startLoop, CANVAS_UPDATE_RATE);
     }
-
-
 });
 
 

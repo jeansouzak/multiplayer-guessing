@@ -14,9 +14,11 @@ const drawedList = [];
 io.on('error', e => console.log(e));
 
 io.on('connection', function (socket) {
-
-
+  socket.on('draw', function (line) {
+    socket.broadcast.emit('draw', line);
+  });
 });
+
 http.listen(port, host, function () {
   console.log('Server HTTP started. Listening on *:' + port);
 });

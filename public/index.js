@@ -11,12 +11,5 @@ $("#data").click(function (e) {
         alert("Por favor, coloque um palavra valida");
         return;
     }
-    socket.emit("start", user, function (cb) {
-        if (!cb){
-            allowSubmit = false;
-            alert("Nome já utilizado nesta sala");
-            return;
-        }
-        window.location.href = '/draw?name=' + user.name + 'word=' + user.word;
-    });
+    window.location.href = '/draw?name=' + user.name + '&word=' + user.word;
 });

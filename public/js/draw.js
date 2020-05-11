@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         prev_pos: {},
         pos: { x: 0, y: 0 },
         lineWidth: 2, //TODO: Create dynamic pallete
-        color: "black" //TODO: Create dynamic pallete
+        color: "black"
     };
 
     const canvas = document.getElementById('canvas');
@@ -19,6 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
     setupCanvas();
     setupSocket();
     startLoop();
+
+    //Not Changing color, 
+    // var colors = document.getElementsByClassName('color');
+    // for (var i = 0; i < colors.length; i++){
+    //     colors[i].addEventListener('click', onColorUpdate, false);
+    // }
+    
+    // function onColorUpdate(e){
+    //     drawingData.color = e.target.className.split(' ')[1];
+    // }
 
     function setupCanvas() {
         canvas.width = width;
@@ -41,6 +51,17 @@ document.addEventListener("DOMContentLoaded", function () {
         socket.on('draw', function(line) {
             draw(line);
         });
+
+        $("form#chat").submit(function (e) {
+            e.preventDefault();
+            var word = $(this).find("#guess_word").val();
+            socket.emit("send word", { msg: word,}, function (cb) {
+                 $("form#chat #guess_word").val("");
+                 if(cb){
+                    alert('ACERTOU');
+                 }
+            });
+       });
     }
 
     function draw(line) {

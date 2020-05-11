@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Shared Draw Game</title>
     <meta charset="utf-8">
@@ -9,16 +8,28 @@
     <link rel="stylesheet" href="../css/draw.css" />
 
 </head>
-
 <body>
-    <div>
+    <div class="title">
         <h3>Nome: <%= name %> | Palavra: <%= word %></h3>
     </div>
+    <!-- <div class="colors">
+        <div class="color black"></div>
+        <div class="color red"></div>
+        <div class="color green"></div>
+        <div class="color blue"></div>
+        <div class="color yellow"></div>
+    </div> -->
     <div>
         <canvas id="canvas"></canvas>
     </div>
+    <div>
+        <form id="chat">
+            <input type='text' id='guess_word' name='guess_word' autocomplete="off" />
+            <input type='submit' value='Enviar!' />
+        </form>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="../socket.io.min.js"></script>
     <script type="text/javascript" src="../js/draw.js"></script>
 </body>
-
 </html>

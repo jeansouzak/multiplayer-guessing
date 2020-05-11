@@ -10,7 +10,9 @@
 </head>
 <body>
     <div class="title">
-        <h3>Nome: <%= name %> | Palavra: <%= word %></h3>
+        <h3 id="name">Nome : <%= name %></h3>
+        <h3 id="word"> Palavra: <%= word %></h3>
+        <h3 id="points">Pontos: <%= points %></h3>
     </div>
     <!-- <div class="colors">
         <div class="color black"></div>
@@ -25,6 +27,7 @@
     <div>
         <form id="chat">
             <input type='text' id='guess_word' name='guess_word' autocomplete="off" />
+            <input type="hidden" id="user_name" value="<%= name %>"/>
             <input type='submit' value='Enviar!' />
         </form>
     </div>

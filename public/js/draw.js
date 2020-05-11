@@ -54,13 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         $("form#chat").submit(function (e) {
             e.preventDefault();
-            var word = $(this).find("#guess_word").val();
-            socket.emit("send word", { msg: word,}, function (cb) {
+            var guessWord = $(this).find("#guess_word").val();
+            var name = $(this).find("#user_name").val();
+            socket.emit("send word", { guessWord: guessWord, name: name}, function (cb) {
                  $("form#chat #guess_word").val("");
-                 if(cb){
-                    alert('ACERTOU');
-                 }
             });
+            socket.on('send points', function(thisUser){
+                document.getElementById('points').innerHTML = "Pontos: " + thisUser.points.toString();
+            })
        });
     }
 

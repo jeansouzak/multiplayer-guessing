@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shared Draw Game - RANKING</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../css/ranking.css" />
+</head>
+<body>
+    <h1>Ranking</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Palavra</th>
+        <th>Pontos</th>
+    </tr>
+
+    <% players.forEach(function(user) { %>
+        <tr>
+            <td><%= user.name %></td>
+            <td><%= user.word %></td>
+            <td><%= user.points %></td>
+        </tr>
+      <% }); %>
+</table>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../socket.io.min.js"></script>
+    <script type="text/javascript" src="../js/ranking.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const CANVAS_UPDATE_RATE = 25; //Miliseconds
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const width = 1400;
+    const height = 800;
 
     const drawingData = {
         clicked: false,
@@ -20,15 +20,24 @@ document.addEventListener("DOMContentLoaded", function () {
     setupSocket();
     startLoop();
 
-    //Not Changing color, 
-    // var colors = document.getElementsByClassName('color');
-    // for (var i = 0; i < colors.length; i++){
-    //     colors[i].addEventListener('click', onColorUpdate, false);
-    // }
+    var colors = document.getElementsByClassName('color');
+    for (var i = 0; i < colors.length; i++){
+        colors[i].addEventListener('click', onColorUpdate, false);
+    }
     
-    // function onColorUpdate(e){
-    //     drawingData.color = e.target.className.split(' ')[1];
-    // }
+    function onColorUpdate(e){
+        drawingData.color = e.target.className.split(' ')[1];
+    }
+
+    $('#sendWord').submit(function(e) {
+        e.preventDefault();
+        let body = {name: $("#username").val() , word : $("#guessword").val()};
+        $("#guessword").val('');
+        post = $.post('/send-word', body);
+        post.done(function( player ) {
+            document.getElementById('points').innerHTML = "Pontos: " + player.points;
+        });
+    });
 
     function setupCanvas() {
         canvas.width = width;
@@ -51,24 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
         socket.on('draw', function(line) {
             draw(line);
         });
-
-        $("form#chat").submit(function (e) {
-            e.preventDefault();
-            var guessWord = $(this).find("#guess_word").val();
-            var name = $(this).find("#user_name").val();
-            socket.emit("send word", { guessWord: guessWord, name: name}, function (cb) {
-                 $("form#chat #guess_word").val("");
-            });
-            socket.on('send points', function(thisUser){
-                document.getElementById('points').innerHTML = "Pontos: " + thisUser.points.toString();
-            })
-       });
     }
 
     function draw(line) {
         context.beginPath();
         context.lineWidth = line.lineWidth;
-        context.strokeColor = line.color;
+        context.strokeStyle = line.color;
         context.moveTo(line.end.x * width, line.end.y * height);
         context.lineTo(line.start.x * width, line.start.y * height);
         context.stroke();

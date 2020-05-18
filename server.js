@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 const port = 5000;
 const host = 'localhost';
 const user = require('./public/js/user'); 
-const service = require('./app/services');
+const tools = require('./app/tools');
 const players = [];
+const drawedList = []; // TODO: History with drawed lines to render on new client connection
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
@@ -18,29 +19,29 @@ app.use(bodyParser.json());
 
 app.post('/draw', (req, res) => {
     let newUser = new user(req.body.name, req.body.word);
-    let player = service.findPlayer(newUser.name, players);
+    let player = tools.findPlayer(newUser.name, players);
     if(!player){
       players.push(newUser);
       res.render('draw', newUser);
     } else {
     //TODO: error message
-    res.redirect('/');
+      res.redirect('/');
   }
 })
 
 app.post('/send-word', (req, res) => {
-    if(service.hasWord(req.body.word, players)){
-      winnerPlayer = service.findPlayer(req.body.name, players);
+    if(tools.hasWord(req.body.word, players)){
+      thisUser = tools.findPlayer(req.body.name, players);
       //TODO: Rules to not guess your own word
-      if(winnerPlayer){
-        winnerPlayer.points++;
+      if(thisUser){
+        thisUser.points++;
       }
-      res.send(winnerPlayer);
+      res.send(thisUser);
     }
 });
 
 app.post('/ranking', (req, res) =>{
-  players.sort(service.dynamicSort("points","desc"));
+  players.sort((a, b) => b.points - a.points);
   res.render('ranking', {players : players});
 });
 

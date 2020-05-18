@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const CANVAS_UPDATE_RATE = 25; //Miliseconds
-    const width = 1400;
-    const height = 800;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
     const drawingData = {
         clicked: false,
@@ -20,14 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
     setupSocket();
     startLoop();
 
-    var colors = document.getElementsByClassName('color');
-    for (var i = 0; i < colors.length; i++){
-        colors[i].addEventListener('click', onColorUpdate, false);
-    }
-    
-    function onColorUpdate(e){
-        drawingData.color = e.target.className.split(' ')[1];
-    }
+    $('.color').click(function(){
+        let color = $(this).attr('class').split(' ')[1];
+        console.log(color);
+        drawingData.color = color;
+    });
 
     $('#sendWord').submit(function(e) {
         e.preventDefault();

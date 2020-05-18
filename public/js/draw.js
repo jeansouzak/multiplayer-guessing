@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $('.color').click(function(){
         let color = $(this).attr('class').split(' ')[1];
-        console.log(color);
         drawingData.color = color;
     });
 

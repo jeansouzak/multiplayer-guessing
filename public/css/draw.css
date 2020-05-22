@@ -31,3 +31,30 @@
     left:80%;
     margin-left:-20px
 }
+
+#messagelist{
+   background: #FFF;
+   border:2px solid #000;
+   height: 100px;
+   float:left;
+   margin-bottom: 10px;
+   width:75%;
+   overflow: scroll
+}
+
+form input[type='text']{
+   border:2px solid #000;
+   border-radius: 5px;
+   padding:5px;
+   width:50%;
+}
+form input[type='submit']{
+   background: #000;
+   border:none;
+   border-radius: 5px;
+   color:#FFF;
+   cursor:pointer;
+   font-weight: bold;
+   padding:7px 5px;
+   width:19%;
+}

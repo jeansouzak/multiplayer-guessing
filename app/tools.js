@@ -4,12 +4,7 @@ var self = module.exports = {
     },
 
     findPlayer: function (name, players) {
-      var i;
-      for (i = 0; i < players.length; i++) {
-        if (players[i].name === name) {
-          return players[i];
-        }
-      }
-      return false;
+      let player = players.find( player => player.name === name);
+      return player;
   },
 }

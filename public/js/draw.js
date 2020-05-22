@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const CANVAS_UPDATE_RATE = 25; //Miliseconds
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const width = window.innerWidth/1.15;
+    const height = window.innerHeight/1.25;
 
     const drawingData = {
         clicked: false,
@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function setupSocket() {
         socket.on('draw', function(line) {
             draw(line);
+        });
+        socket.on('chat', function(name, word){
+            var message = $("<p />").text(name + ': ' + word);
+            $("#messagelist").append(message);
         });
     }
 

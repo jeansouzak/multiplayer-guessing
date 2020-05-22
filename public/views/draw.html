@@ -24,7 +24,8 @@
     <div>
         <canvas id="canvas"></canvas>
     </div>
-    <div class="wordBox">
+    <div id="messages">
+        <div id="messagelist"></div>
         <form action="send-word" method="POST" id="sendWord">
             <input type="text" name="guessword" id="guessword" placeholder="Digita aqui seu palpite" required>
             <input type="hidden" name="username" id="username" value='<%= name %>'/>

@@ -30,10 +30,15 @@ app.post('/draw', (req, res) => {
 })
 
 app.post('/send-word', (req, res) => {
-    if(tools.hasWord(req.body.word, players)){
-      thisUser = tools.findPlayer(req.body.name, players);
-      //TODO: Rules to not guess your own word
-      if(thisUser){
+    let thisName = req.body.name;
+    let thisWord =  req.body.word;
+    if(thisName && thisWord){
+      io.emit('chat', thisName, thisWord);
+    }
+    if(tools.hasWord(thisWord, players)){
+      thisUser = tools.findPlayer(thisName, players);
+      //TODO: Rules to not guess the same word over and over
+      if(thisUser && thisUser.word != thisWord){
         thisUser.points++;
       }
       res.send(thisUser);
@@ -56,3 +61,5 @@ io.on('connection', function (socket) {
 http.listen(port, host, function () {
   console.log('Server HTTP started. Listening on *:' + port);
 });
+
+//TODO: retrieve message history and drawedList

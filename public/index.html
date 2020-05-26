@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Shared Draw Game</title>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="style.css" />
-
-</head>
-
-<body>
-    <canvas id="canvas"></canvas>
-    <script type="text/javascript" src="socket.io.min.js"></script>
-    <script type="text/javascript" src="draw.js"></script>
-</body>
-
+	<head>
+		<link rel="stylesheet" href="style.css" />
+		<meta charset="utf-8">
+		<title>Shared Draw Game</title>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div class="login-form">
+			<h1>Shared Draw Game</h1>
+			<form action="draw" method="POST">
+				<input type="text" name="name" id="name" placeholder="name" required>
+				<input type="text" name="word" id="word" placeholder="word" required>
+				<input type="submit" id="register">
+			</form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="socket.io.min.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+	</body>
 </html>

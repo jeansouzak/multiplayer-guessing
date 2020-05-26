@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const CANVAS_UPDATE_RATE = 25; //Miliseconds
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const width = window.innerWidth/1.15;
+    const height = window.innerHeight/1.25;
 
     const drawingData = {
         clicked: false,
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         prev_pos: {},
         pos: { x: 0, y: 0 },
         lineWidth: 2, //TODO: Create dynamic pallete
-        color: "black" //TODO: Create dynamic pallete
+        color: "black"
     };
 
     const canvas = document.getElementById('canvas');
@@ -19,6 +19,21 @@ document.addEventListener("DOMContentLoaded", function () {
     setupCanvas();
     setupSocket();
     startLoop();
+
+    $('.color').click(function(){
+        let color = $(this).attr('class').split(' ')[1];
+        drawingData.color = color;
+    });
+
+    $('#sendWord').submit(function(e) {
+        e.preventDefault();
+        let body = {name: $("#username").val() , word : $("#guessword").val()};
+        $("#guessword").val('');
+        post = $.post('/send-word', body);
+        post.done(function( player ) {
+            document.getElementById('points').innerHTML = "Pontos: " + player.points;
+        });
+    });
 
     function setupCanvas() {
         canvas.width = width;
@@ -41,12 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
         socket.on('draw', function(line) {
             draw(line);
         });
+        socket.on('chat', function(name, word){
+            var message = $("<p />").text(name + ': ' + word);
+            $("#messagelist").append(message);
+        });
     }
 
     function draw(line) {
         context.beginPath();
         context.lineWidth = line.lineWidth;
-        context.strokeColor = line.color;
+        context.strokeStyle = line.color;
         context.moveTo(line.end.x * width, line.end.y * height);
         context.lineTo(line.start.x * width, line.start.y * height);
         context.stroke();

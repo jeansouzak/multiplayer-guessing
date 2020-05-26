@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shared Draw Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../css/draw.css" />
+
+</head>
+<body>
+    <div class="title">
+        <h3 id="name">Nome : <%= name %></h3>
+        <h3 id="word"> Palavra: <%= word %></h3>
+        <h3 id="points">Pontos: <%= points %></h3>
+    </div>
+    <div class="colors">
+        <div class="color black"></div>
+        <div class="color red"></div>
+        <div class="color green"></div>
+        <div class="color blue"></div>
+        <div class="color yellow"></div>
+    </div>
+    <div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="messages">
+        <div id="messagelist"></div>
+        <form action="send-word" method="POST" id="sendWord">
+            <input type="text" name="guessword" id="guessword" placeholder="Digita aqui seu palpite" required>
+            <input type="hidden" name="username" id="username" value='<%= name %>'/>
+            <input type="submit" value="Enviar palavra">
+        </form>
+    </div>
+    <div class="finishBox">
+        <form action="ranking" method="POST" id="ranking">
+            <input type="submit" value="Finish">
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../socket.io.min.js"></script>
+    <script type="text/javascript" src="../js/draw.js"></script>
+</body>
+</html>
